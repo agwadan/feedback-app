@@ -1,12 +1,13 @@
    <?php
-    include 'inc/header.php';
+    include 'inc/header.php'; //---------------------------------- Adding the header to the top of the page
 
     $name = $email = $body = ''; //------------------------------- Setting all these variables to nothing
     $nameErr = $emailErr = $bodyErr = ''; //---------------------- Initializing error message variables
 
     if (isset($_POST)) {
 
-      //validate name
+      //validate name//
+      //------------------
       if (empty($_POST['name'])) {
         $nameErr = 'Name is required';
       } else {
@@ -14,6 +15,7 @@
       }
 
       //validate email
+      //------------------
       if (empty($_POST['email'])) {
         $emailErr = 'Email is Required';
       } else {
@@ -21,12 +23,15 @@
       }
 
       //Validate body
+      //------------------
       if (empty($_POST['body'])) {
         $bodyErr = 'Feedback is required';
       } else {
         $body = filter_input(INPUT_POST, 'body', FILTER_SANITIZE_SPECIAL_CHARS);
       }
 
+      //Check if there is no error before inserting into the database
+      //---------------------------------------------------------------
       if (empty($nameErr) && empty($emailErr) && empty($bodyErr)) {
         $sql = "INSERT INTO feedback (name, email, body) VALUES  ('$name', '$email', '$body')";
 
